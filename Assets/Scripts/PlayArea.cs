@@ -4,26 +4,38 @@ using System.Collections;
 public class PlayArea : MonoBehaviour
 {
 	public const int Width = 12;
-	public const int Height = 12;
+	public const int Height = 22;
 
-	static protected int[] grid = new int[Width * Height]; // each int is the index of a block in the blocks's prefabs array
+	protected int[] grid;
 
 
-	static public int xyToIndex(int x, int y)
+	void Awake()
 	{
-		return y * Width + x;
+		grid = new int[Width * Height]; // each int is the index of a block in the blocks's prefabs array
 	}
 
 
-	static public bool isPositionEmpty(float x, float y)
+	public int GetSpriteIndex(int x, int y)
+	{
+		return grid [xyToGridIndex (x, y)];
+	}
+
+
+	protected int xyToGridIndex(int x, int y)
+	{
+		return (y * Width) + x;
+	}
+
+
+	public bool isPositionEmpty(float x, float y)
 	{
 		return isPositionEmpty (Mathf.FloorToInt (x), Mathf.FloorToInt (y));
 	}
 
 
-	static public bool isPositionEmpty(int x, int y)
+	public bool isPositionEmpty(int x, int y)
 	{
-		return (xyToIndex (x, y) == 0);
+		return (xyToGridIndex (x, y) == 0);
 	}
 
 
