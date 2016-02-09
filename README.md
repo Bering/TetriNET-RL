@@ -1,5 +1,5 @@
 # TetriNET-RL
-Yet another clone of TetriNET, the 1997 Tetris game by St0rmcat, written in Unity
+Yet another clone of TetriNET, the 1997 Tetris game by St0rmCat, written in Unity
 
 ## Status
 Alpha. Not playable. Ugly main menu that scales badly (very very badly). Solo mode only shows random blocks falling without interaction.
