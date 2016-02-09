@@ -2,11 +2,12 @@
 Yet another clone of TetriNET, the 1997 Tetris game by St0rmcat, written in Unity
 
 ## Status
-Barely getting started!
+Alpha. Not playable. Ugly main menu that scales badly (very very badly). Solo mode only shows random blocks falling without interaction.
 
 ## Features
 * Cross-platform (Android. WebGL, Linux, Mac, Windows, maybe more)
-* Join or Host (no dedicated server yet, but I'd really like to make a dedicated Linux server)
+* Solo, Join or Host (no dedicated server yet, but I'd really like to make a dedicated Linux server)
+* Compatible with the original themes
 
 ## TODO
 * Main menu (SOLO, IP Address edit field and JOIN button, HOST button, Toggle Sound, Toggle Music)
