@@ -10,6 +10,9 @@ public class InventoryView : MonoBehaviour {
 	protected SpriteRenderer[] inventorySlotViews;
 
 
+	public float FirstX, FirstY, Spread;
+
+
 	void Awake()
 	{
 		inventory = GetComponent<Inventory> ();
@@ -18,15 +21,32 @@ public class InventoryView : MonoBehaviour {
 
 
 	void Start () {
-		
-		for (int i = 0; i < inventory.InventorySlots.Length; i++) {
-			// TODO: OMG what am I doing!!? Time to go to bed LOL
-			inventorySlotViews[i] = transform.FindChild("Inventory_"+i).gameObject.GetComponent<SpriteRenderer> ();
-
-			inventory.InventorySlots[i]= Random.Range (6, 15);
-			inventorySlotViews [i].sprite = GameObject.Find ("PlayArea").GetComponent<PlayAreaView> ().blocksSprites[inventory.InventorySlots [i]];
-		}
-
+		SpawnRenderers ();
 	}
+
+
+	void SpawnRenderers()
+	{
+		GameObject go = null;
+
+		for (int i = 0; i < inventory.inventorySlots.Length; i++) {
+
+			go = Instantiate(new GameObject(), new Vector3 (FirstX + (i * Spread), FirstY), Quaternion.identity) as GameObject;
+			go.name = "Inventory Slot #" + i;
+			go.transform.SetParent(transform, false);
+
+			inventorySlotViews[i] = go.AddComponent<SpriteRenderer> ();
+		}
+	}
+
+
+	public void UpdateRenderers()
+	{
+		for (int i = 0; i < inventory.inventorySlots.Length; i++) {
+			// TODO Move the sprites lists into a Theme object
+			inventorySlotViews [i].sprite = GameObject.Find ("PlayArea (Player 1)").GetComponent<PlayAreaView> ().blocksSprites[inventory.inventorySlots [i]];
+		}
+	}
+
 
 }

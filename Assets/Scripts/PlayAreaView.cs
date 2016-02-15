@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Assertions;
 using System.Collections;
 using System.Collections.Generic;
+
 
 [RequireComponent(typeof(PlayArea))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayAreaView : MonoBehaviour
 {
 	public int blockSizeInPixels = 16;
-	public Sprite playAreaBackground;
 	public List<Sprite> blocksSprites;
-	public GameObject blockPrefab;
+	public Sprite playAreaBackground;
 
 	protected PlayArea playArea;
+	protected SpriteRenderer[] grid;
 
 
-	protected void Awake()
+	void Awake()
 	{
 		playArea = GetComponent<PlayArea> ();
 	}
@@ -22,55 +25,45 @@ public class PlayAreaView : MonoBehaviour
 
 	void Start()
 	{
-		for (int y = 0; y < PlayArea.Height; y++) {
-			for (int x = 0; x < PlayArea.Width; x++) {
-				SpawnBlock (x, y);
+		SpawnRenderers();
+	}
+
+
+	protected int convertXYToGridIndex(int x, int y)
+	{
+		Assert.IsTrue (x >= 0 && x < PlayArea.BlocksPerRow);
+		Assert.IsTrue (y >= 0 && x < PlayArea.NumberOfRows);
+		return (y * PlayArea.BlocksPerRow) + x;
+	}
+
+
+	protected void SpawnRenderers()
+	{
+		grid = new SpriteRenderer[PlayArea.BlocksPerRow * PlayArea.NumberOfRows];
+
+		GameObject go = null;
+
+		for (int y = 0; y < PlayArea.NumberOfRows; y++) {
+			for (int x = 0; x < PlayArea.BlocksPerRow; x++) {
+
+				go = Instantiate(new GameObject(), new Vector3 (x * blockSizeInPixels/16f, y * blockSizeInPixels/16f), Quaternion.identity) as GameObject; // Why 16? Because original theme in BMP file is 16x16
+				go.name = "Block (" + x + "," + y + ")";
+				go.transform.SetParent(transform, false);
+
+				grid [convertXYToGridIndex(x,y)] = go.AddComponent<SpriteRenderer> ();
+
 			}
 		}
-
-		StartCoroutine ("SpawnRandomForShow");
 	}
 
 
-	void SpawnBlock(float x, float y)
+	// Called when GridChangedEvent is invoked
+	public void UpdateRenderers()
 	{
-		GameObject go = null;
-		Vector3 pos = transform.position;
-
-		if (blockSizeInPixels == 16) {
-			go = Instantiate(blockPrefab, new Vector3 (pos.x + x, pos.y + y), Quaternion.identity) as GameObject;
-		} else {
-			go = Instantiate(blockPrefab, new Vector3 (pos.x + x/2f, pos.y + y/2f), Quaternion.identity) as GameObject;
-		}
-
-		go.name = "Block (" + x + "," + y + ")";
-		go.transform.parent = transform;
-
-		//go.GetComponent<SpriteRenderer>().sprite = blocksSprites[playArea.GetSpriteIndex (x,y)];
-		go.GetComponent<SpriteRenderer>().sprite = blocksSprites[Random.Range(1, blocksSprites.Count)];
-	}
-
-
-	protected IEnumerator  SpawnRandomForShow()
-	{
-		int x1, x2, x3, x4,  right;
-		Vector3 pos = transform.position;
-
-		right = 11;
-
-		while(true)
-		{
-			x1 = Random.Range (0, right - 3);
-			x2 = Random.Range (x1+1, right - 2);
-			x3 = Random.Range (x2+1, right - 1);
-			x4 = Random.Range (x3+1, right);
-
-			SpawnBlock (x1, 21);
-			SpawnBlock (x2, 21);
-			SpawnBlock (x3, 21);
-			SpawnBlock (x4, 21);
-
-			yield return new WaitForSeconds (1);
+		for (int y = 0; y < PlayArea.NumberOfRows; y++) {
+			for (int x = 0; x < PlayArea.BlocksPerRow; x++) {
+				grid [convertXYToGridIndex (x, y)].sprite = blocksSprites[playArea.GetBlockType (x,y)];
+			}
 		}
 	}
 
