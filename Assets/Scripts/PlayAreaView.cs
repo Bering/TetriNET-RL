@@ -46,14 +46,16 @@ public class PlayAreaView : MonoBehaviour
 		for (int y = 0; y < PlayArea.NumberOfRows; y++) {
 			for (int x = 0; x < PlayArea.BlocksPerRow; x++) {
 
-				go = Instantiate(new GameObject(), new Vector3 (x * blockSizeInPixels/16f, y * blockSizeInPixels/16f), Quaternion.identity) as GameObject; // Why 16? Because original theme in BMP file is 16x16
-				go.name = "Block (" + x + "," + y + ")";
-				go.transform.SetParent(transform, false);
+				go = new GameObject ("Block (" + x + "," + y + ")");
+				go.transform.SetParent(transform);
+				go.transform.position = transform.position +  new Vector3 (x * blockSizeInPixels / 16f, y * blockSizeInPixels / 16f);
+				go.transform.rotation = Quaternion.identity;
 
 				grid [convertXYToGridIndex(x,y)] = go.AddComponent<SpriteRenderer> ();
 
 			}
 		}
+
 	}
 
 

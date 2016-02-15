@@ -16,7 +16,6 @@ public class InventoryView : MonoBehaviour {
 	void Awake()
 	{
 		inventory = GetComponent<Inventory> ();
-		inventorySlotViews = new SpriteRenderer[18];
 	}
 
 
@@ -27,13 +26,16 @@ public class InventoryView : MonoBehaviour {
 
 	void SpawnRenderers()
 	{
+		inventorySlotViews = new SpriteRenderer[18];
+
 		GameObject go = null;
 
 		for (int i = 0; i < inventory.inventorySlots.Length; i++) {
 
-			go = Instantiate(new GameObject(), new Vector3 (FirstX + (i * Spread), FirstY), Quaternion.identity) as GameObject;
-			go.name = "Inventory Slot #" + i;
-			go.transform.SetParent(transform, false);
+			go = new GameObject("Inventory Slot #" + i);
+			go.transform.SetParent(transform);
+			go.transform.position = transform.position + new Vector3 (FirstX + (i * Spread), FirstY);
+			go.transform.rotation = Quaternion.identity;
 
 			inventorySlotViews[i] = go.AddComponent<SpriteRenderer> ();
 		}
