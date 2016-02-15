@@ -11,36 +11,14 @@ public class PlayAreaView : MonoBehaviour
 	public List<Sprite> blocksSprites;
 	public GameObject blockPrefab;
 
-	//protected Texture2D playAreaDynamicTexture;
 	protected PlayArea playArea;
-	//protected SpriteRenderer spriteRenderer;
+
 
 	protected void Awake()
 	{
 		playArea = GetComponent<PlayArea> ();
-		//spriteRenderer = GetComponent<SpriteRenderer> ();
-		//playAreaDynamicTexture = new Texture2D(PlayArea.Width*blockSizeInPixels, PlayArea.Height*blockSizeInPixels);
-		//spriteRenderer.sprite = playAreaDynamicTexture;
-
 	}
 
-	/*
-	protected void UpdateTexture()
-	{
-		int spriteIndex;
-		Sprite blockSprite = null;
-
-		for (int y = 0; y < PlayArea.Height; y++) {
-			for (int x = 0; x < PlayArea.Width; x++) {
-				spriteIndex = playArea.GetSpriteIndex (x, y);
-				blockSprite = blocksSprites[spriteIndex];
-				playAreaDynamicTexture.SetPixels (x * blockSizeInPixels, y * blockSizeInPixels, blockSizeInPixels, blockSizeInPixels, blockSprite.texture.GetPixels ());
-			}
-		}
-
-		playAreaDynamicTexture.Apply ();
-	}
-	*/
 
 	void Start()
 	{
