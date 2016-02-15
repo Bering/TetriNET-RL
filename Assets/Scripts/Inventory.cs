@@ -10,6 +10,8 @@ public class Inventory : MonoBehaviour {
 
 	public UnityEvent InventoryChangedEvent;
 
+	protected bool isDirty;
+
 
 	void Awake()
 	{
@@ -23,7 +25,16 @@ public class Inventory : MonoBehaviour {
 			inventorySlots[i]= Random.Range (PlayArea.normalBlocksCount+1, PlayArea.totalBlocksCount); // +1 because of the empty block
 		}
 
-		InventoryChangedEvent.Invoke ();
+		isDirty = true;
+	}
+
+
+	void Update()
+	{
+		if (isDirty) {
+			InventoryChangedEvent.Invoke ();
+			isDirty = false;
+		}
 	}
 
 
