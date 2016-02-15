@@ -10,8 +10,6 @@ using System.Collections.Generic;
 public class PlayAreaView : MonoBehaviour
 {
 	public int blockSizeInPixels = 16;
-	public List<Sprite> blocksSprites;
-	public Sprite playAreaBackground;
 
 	protected PlayArea playArea;
 	protected SpriteRenderer[] grid;
@@ -64,7 +62,11 @@ public class PlayAreaView : MonoBehaviour
 	{
 		for (int y = 0; y < PlayArea.NumberOfRows; y++) {
 			for (int x = 0; x < PlayArea.BlocksPerRow; x++) {
-				grid [convertXYToGridIndex (x, y)].sprite = blocksSprites[playArea.GetBlockType (x,y)];
+				if (blockSizeInPixels == 16) {
+					grid [convertXYToGridIndex (x, y)].sprite = Theme.current.blocksSprites16 [playArea.GetBlockType (x, y)];
+				}else{
+					grid [convertXYToGridIndex (x, y)].sprite = Theme.current.blocksSprites8 [playArea.GetBlockType (x, y)];
+				}
 			}
 		}
 	}

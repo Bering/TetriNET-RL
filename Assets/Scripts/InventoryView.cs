@@ -45,8 +45,7 @@ public class InventoryView : MonoBehaviour {
 	public void UpdateRenderers()
 	{
 		for (int i = 0; i < inventory.inventorySlots.Length; i++) {
-			// TODO Move the sprites lists into a Theme object
-			inventorySlotViews [i].sprite = GameObject.Find ("PlayArea (Player 1)").GetComponent<PlayAreaView> ().blocksSprites[inventory.inventorySlots [i]];
+			inventorySlotViews [i].sprite = Theme.current.blocksSprites16[inventory.inventorySlots [i]];
 		}
 	}
 
