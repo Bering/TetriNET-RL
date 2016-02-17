@@ -3,7 +3,7 @@ Yet another clone of TetriNET, the 1997 Tetris game by St0rmCat, written in Unit
 ![Screenshot](Screenshots/latest.gif)
 
 ## Status
-Alpha. Not playable. Ugly main menu that scales badly (very very badly). Solo mode only shows random blocks falling without interaction.
+Alpha. Not playable yet. Ugly main menu. Working on Solo mode. Solo backend mostly done. Just got random tetrominoes spawning.
 
 ## Features
 * Cross-platform (Android. WebGL, Linux, Mac, Windows, maybe more)
@@ -11,15 +11,16 @@ Alpha. Not playable. Ugly main menu that scales badly (very very badly). Solo mo
 * Compatible with the original themes
 
 ## TODO
-* Main menu (SOLO, IP Address edit field and JOIN button, HOST button, Toggle Sound, Toggle Music)
-* Make the single-player mode (no special blocks)
+* Start with SOLO mode
 * Figure out the controls for Android
-* Learn the protocol (there are many open source servers out there)
+* HOST menu (show your public IP, HOST button)
+* JOIN menu (IP Address input field and JOIN button
+* Lobby (Players list, chat, Start button)
+* Learn the protocol (Or maybe just drop legacy servers support.)
 * Make the server code
-* Check out the Unity Services for matchmaking and NAT-traversal
-* Figure out a clever way to invite friends (SMS? Email? Twitter? Unity Matchmaking? Photon Lobby?)
-* Decide: text chat?
-* Decide: voice chat?
+* Figure out a clever way to invite friends (SMS? Email? Twitter? Unity Matchmaking? Photon Library?)
+* Options menu (TetriFast, TetriNET2 blocks, Mixers volumes, whatever else?)
+* voice chat?
 
 ## FAQ
 
@@ -30,4 +31,4 @@ Nope!
 Never! Now go away and stop pestering me :-P
 
 ### What's the RL in the name?
-It stands for RingLogic, the name of my (fake) company
+It stands for RingLogic, the name of my (fake) company. Or for ReLoaded :-)
