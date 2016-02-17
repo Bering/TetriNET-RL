@@ -11,6 +11,7 @@ public class PlayArea : MonoBehaviour
 	public const int normalBlocksCount = 5; // Blue, Yellow, Green, Purple, Red
 	public const int specialBlocksCount = 9; // A, C, N, R, S, B, G, Q, O
 	public const int totalBlocksCount = normalBlocksCount + specialBlocksCount + 1; // +1 for the empty block (i.e. no block)
+	public const int spawnX = 5;
 
 	public UnityEvent GridChangedEvent;
 
@@ -19,6 +20,12 @@ public class PlayArea : MonoBehaviour
 
 
 	void Awake()
+	{
+		Clear ();
+	}
+
+	
+	public void Clear()
 	{
 		grid = new int[BlocksPerRow * NumberOfRows]; // each int is the index of a block in the blocks's prefabs array
 	}
@@ -53,7 +60,6 @@ public class PlayArea : MonoBehaviour
 			isDirty = false;
 		}
 	}
-
 
 }
 
