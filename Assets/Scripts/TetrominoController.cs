@@ -9,13 +9,13 @@ public class TetrominoController : MonoBehaviour
 
 	void Spawn(PlayArea playArea)
 	{
-		tetromino = Tetromino.SpawnRandomTetromino(playArea);
+		tetromino = Tetromino.CreateRandomTetromino();
 	}
 
 
 	void Start()
 	{
-		Spawn (GameObject.FindObjectOfType<PlayArea> ());
+		//Spawn (GameObject.FindObjectOfType<PlayArea> ());
 	}
 
 	/*
@@ -84,5 +84,4 @@ public class TetrominoController : MonoBehaviour
 		return 0;
 	}
 
-	}
-
+}
