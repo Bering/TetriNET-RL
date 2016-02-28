@@ -27,7 +27,7 @@ public class TetrominoTest : MonoBehaviour {
 		while (true) {
 			
 			for (int i = 0; i < playAreas.Length; i++) {
-				tetromino = Tetromino.SpawnRandomTetromino (playAreas [i]);
+				tetromino = Tetromino.CreateRandomTetromino ();
 				tetromino.Spawn (playAreas [i]);
 			}
 
