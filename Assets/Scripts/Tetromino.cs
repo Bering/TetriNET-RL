@@ -10,7 +10,7 @@ public class Tetromino
 	public Vector2[] blocks;
 
 
-	public static Tetromino SpawnRandomTetromino(PlayArea playArea)
+	public static Tetromino CreateRandomTetromino()
 	{
 		int typeInt = Random.Range (0, (int)Types.Count);
 

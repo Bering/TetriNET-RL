@@ -9,7 +9,7 @@ public class TetrominoController : MonoBehaviour
 
 	void Spawn(PlayArea playArea)
 	{
-		tetromino = Tetromino.SpawnRandomTetromino(playArea);
+		tetromino = Tetromino.CreateRandomTetromino();
 	}
 
 
