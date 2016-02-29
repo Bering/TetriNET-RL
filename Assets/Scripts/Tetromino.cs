@@ -8,7 +8,7 @@ public class Tetromino
 	public Types type;
 	public int spriteType;
 	public Vector2[] blocks;
-
+	public PlayArea playArea;
 
 	public static Tetromino CreateRandomTetromino()
 	{
@@ -27,8 +27,9 @@ public class Tetromino
 		}
 	}
 
-	public virtual void Spawn (PlayArea playArea)
+	public void Spawn (PlayArea playArea)
 	{
+		this.playArea = playArea;
 		Vector2 spawnPoint = new Vector2 (PlayArea.spawnX, PlayArea.NumberOfRows - 1);
 
 		for (int i = 0; i < blocks.Length; i++) {
