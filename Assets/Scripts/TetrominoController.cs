@@ -1,61 +1,220 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class TetrominoController : MonoBehaviour
 {
 
-	public Tetromino tetromino;
+	public Tetromino tetromino = null;
+	
+	protected PlayArea playArea;
+	protected bool dropping = false;
+	protected bool looping = false;
 
 
-	void Spawn(PlayArea playArea)
+	Tetromino SpawnNewTetromino()
 	{
-		tetromino = Tetromino.CreateRandomTetromino();
+		Tetromino t = Tetromino.CreateRandomTetromino();
+		t.Spawn (playArea);
+		dropping = false;
+
+		return t;
+	}
+
+
+	void Awake()
+	{
+		playArea = GetComponent<PlayArea> ();
 	}
 
 
 	void Start()
 	{
-		//Spawn (GameObject.FindObjectOfType<PlayArea> ());
+		StartCoroutine ("Loop");
 	}
 
-	/*
+
+	protected IEnumerator Loop()
+	{
+		looping = true;
+		Debug.Log ("Loop started");
+		// TODO: Play start sound
+		// TODO: Start soundtrack
+		yield return new WaitForSeconds (1f);
+
+		while (looping) {
+			tetromino = SpawnNewTetromino ();
+
+			while (tetromino != null) {
+				yield return new WaitForSeconds (1f);
+
+				// TODO: MoveDown has as a side-effect of nullifying tetromino if it cannot move down. How about calling it TryMoveDown() or something...
+				if (tetromino != null) {
+					MoveDown ();
+				}
+			}
+
+			// TODO: Play block stop sound
+
+			// TODO: if (Options.tetriFast == false)
+			yield return new WaitForSeconds (1f);
+		}
+	}
+
+
 	void Update ()
 	{
-		h = Input.GetAxis ("Horizontal");
-		v = Input.GetAxis ("Vertical");
+		if (tetromino == null) {
+			return;
+		}
 
-		if (h < 0) {
+		if (Input.GetAxis("Horizontal") < 0) {
 			MoveLeft ();
 		}
-		else if (h > 0) {
+		else if (Input.GetAxis("Horizontal") > 0) {
 			MoveRight ();
 		}
 
-		if (v < 0) {
+		if (dropping == true || Input.GetAxis("Vertical") < 0) {
 			MoveDown ();
 		}
-		else if (v > 0) {
-			RotateRight();
+
+		if (Input.GetButtonDown("Submit")) {
+			dropping = true;
+		}
+
+		if (Input.GetButtonDown("Fire1")) {
+			RotateLeft ();
+		}
+
+		if (Input.GetButtonDown("Fire2")) {
+			RotateRight ();
 		}
 
 	}
-*/
 
+
+	protected void RemoveFromArea()
+	{
+		for (int n = 0; n < tetromino.blocks.Length; n++) {
+			tetromino.playArea.SetBlockType (tetromino.blocks [n], 0);
+		}
+	}
+
+
+	protected void Redraw()
+	{
+		for (int n = 0; n < tetromino.blocks.Length; n++) {
+			tetromino.playArea.SetBlockType (tetromino.blocks [n], tetromino.spriteType);
+		}
+	}
+
+	
+	// This assumes that the block is not on the board. If it is, it will collide with itself.
+	protected bool canMoveLeft()
+	{
+		int x, y;
+
+		for (int n = 0; n < tetromino.blocks.Length; n++) {
+			x = Mathf.RoundToInt (tetromino.blocks [n].x);
+			y = Mathf.RoundToInt (tetromino.blocks [n].y);
+
+			if (x == 0) {
+				return false;
+			}
+
+			if (tetromino.playArea.GetBlockType (x-1, y) != 0)
+				return false;
+		}
+
+		return true;
+	}
 	protected void MoveLeft()
 	{
+		RemoveFromArea ();
+
+		if (canMoveLeft ()) {
+			for (int n = 0; n < tetromino.blocks.Length; n++) {
+				tetromino.blocks [n].x--;
+			}
+		}
+
+		Redraw ();
 	}
 
 
+	// This assumes that the block is not on the board. If it is, it will collide with itself.
+	protected bool canMoveRight()
+	{
+		int x, y;
+
+		for (int n = 0; n < tetromino.blocks.Length; n++) {
+			x = Mathf.RoundToInt (tetromino.blocks [n].x);
+			y = Mathf.RoundToInt (tetromino.blocks [n].y);
+
+			if (x == PlayArea.BlocksPerRow-1) {
+				return false;
+			}
+
+			if (tetromino.playArea.GetBlockType (x+1, y) != 0)
+				return false;
+		}
+
+		return true;
+	}
 	protected void MoveRight()
 	{
+		RemoveFromArea ();
+
+		if (canMoveRight ()) {
+			for (int n = 0; n < tetromino.blocks.Length; n++) {
+				tetromino.blocks [n].x++;
+			}
+		}
+
+		Redraw ();
 	}
 
 
+	// This assumes that the block is not on the board. If it is, it will collide with itself.
+	protected bool canMoveDown()
+	{
+		int x, y;
+
+		for (int n = 0; n < tetromino.blocks.Length; n++) {
+			x = Mathf.RoundToInt (tetromino.blocks [n].x);
+			y = Mathf.RoundToInt (tetromino.blocks [n].y);
+
+			if (y == 0) {
+				return false;
+			}
+
+			if (tetromino.playArea.GetBlockType (x, y-1) != 0)
+				return false;
+		}
+
+		return true;
+	}
 	protected void MoveDown()
 	{
+		RemoveFromArea ();
+
+		if (canMoveDown ()) {
+			for (int n = 0; n < tetromino.blocks.Length; n++) {
+				tetromino.blocks [n].y--;
+			}
+
+			Redraw ();
+		}
+
+		else {
+			Redraw ();
+			tetromino = null;
+		}
+
 	}
 
-
+	
 	protected void RotateRight()
 	{
 	}
@@ -65,23 +224,5 @@ public class TetrominoController : MonoBehaviour
 	{
 	}
 
-
-	protected void Dropdown()
-	{
-		// TODO: call whereToDropDown() on each block in the tetromino
-		// TODO: use the highest value as target
-	}
-
-
-	protected float whereToDropDown()
-	{
-		for (float y = transform.position.y; y > 0; y--) {
-			/*if (!PlayArea.isPositionEmpty(transform.position.x, y)) {
-				return y;
-			}*/
-		}
-
-		return 0;
-	}
 
 }
