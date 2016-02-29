@@ -5,8 +5,13 @@ using System.Collections;
 public class TetrominoController : MonoBehaviour
 {
 
-	public Tetromino tetromino = null;
-	
+	[SerializeField]
+	protected float inputCooldown = 0.1f;
+	[SerializeField]
+	protected float lastInputTime = 0;
+
+
+	protected Tetromino tetromino = null;
 	protected PlayArea playArea;
 	protected bool dropping = false;
 	protected bool looping = false;
@@ -17,6 +22,7 @@ public class TetrominoController : MonoBehaviour
 		Tetromino t = Tetromino.CreateRandomTetromino();
 		t.Spawn (playArea);
 		dropping = false;
+		lastInputTime = 0;
 
 		return t;
 	}
@@ -68,26 +74,40 @@ public class TetrominoController : MonoBehaviour
 			return;
 		}
 
+		if (Time.time < lastInputTime + inputCooldown) {
+			return;
+		}
+
+		if (dropping == true) {
+			MoveDown ();
+		}
+		
 		if (Input.GetAxis("Horizontal") < 0) {
+			lastInputTime = Time.time;
 			MoveLeft ();
 		}
 		else if (Input.GetAxis("Horizontal") > 0) {
+			lastInputTime = Time.time;
 			MoveRight ();
 		}
 
-		if (dropping == true || Input.GetAxis("Vertical") < 0) {
+		if (Input.GetAxis("Vertical") < 0) {
+			lastInputTime = Time.time;
 			MoveDown ();
 		}
 
 		if (Input.GetButtonDown("Submit")) {
+			lastInputTime = Time.time;
 			dropping = true;
 		}
 
 		if (Input.GetButtonDown("Fire1")) {
+			lastInputTime = Time.time;
 			RotateLeft ();
 		}
 
 		if (Input.GetButtonDown("Fire2")) {
+			lastInputTime = Time.time;
 			RotateRight ();
 		}
 
