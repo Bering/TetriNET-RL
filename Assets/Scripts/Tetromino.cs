@@ -32,7 +32,7 @@ public class Tetromino
 		Vector2 spawnPoint = new Vector2 (PlayArea.spawnX, PlayArea.NumberOfRows - 1);
 
 		for (int i = 0; i < blocks.Length; i++) {
-			blocks[i] += spawnPoint;
+			blocks[i] = spawnPoint - blocks[i];
 
 			playArea.SetBlockType (Mathf.FloorToInt(blocks[i].x), Mathf.FloorToInt(blocks[i].y), spriteType);
 		}
@@ -49,8 +49,8 @@ public class Tetromino_O : Tetromino
 		blocks = new Vector2[] {
 			new Vector2(0,0),
 			new Vector2(1,0),
-			new Vector2(0,-1),
-			new Vector2(1,-1)
+			new Vector2(0,1),
+			new Vector2(1,1)
 		};
 	}
 }
@@ -62,10 +62,10 @@ public class Tetromino_T : Tetromino
 		spriteType = 2;
 		type = Tetromino.Types.T;
 		blocks = new Vector2[] {
-			new Vector2(-1,0),
 			new Vector2(0,0),
+			new Vector2(-1,0),
 			new Vector2(1,0),
-			new Vector2(0,-1)
+			new Vector2(0,1)
 		};
 	}
 }
@@ -78,9 +78,9 @@ public class Tetromino_I : Tetromino
 		type = Tetromino.Types.I;
 		blocks = new Vector2[] {
 			new Vector2(0,0),
-			new Vector2(0,-1),
-			new Vector2(0,-2),
-			new Vector2(0,-3)
+			new Vector2(0,1),
+			new Vector2(0,2),
+			new Vector2(0,3)
 		};
 	}
 }
@@ -94,8 +94,8 @@ public class Tetromino_S : Tetromino
 		blocks = new Vector2[] {
 			new Vector2(0,0),
 			new Vector2(1,0),
-			new Vector2(-1,-1),
-			new Vector2(0,-1)
+			new Vector2(-1,1),
+			new Vector2(0,1)
 		};
 	}
 }
@@ -109,8 +109,8 @@ public class Tetromino_Z : Tetromino
 		blocks = new Vector2[] {
 			new Vector2(-1,0),
 			new Vector2(0,0),
-			new Vector2(0,-1),
-			new Vector2(1,-1)
+			new Vector2(0,1),
+			new Vector2(1,1)
 		};
 	}
 }
@@ -123,9 +123,9 @@ public class Tetromino_J : Tetromino
 		type = Tetromino.Types.J;
 		blocks = new Vector2[] {
 			new Vector2(0,0),
-			new Vector2(0,-1),
-			new Vector2(-1,-2),
-			new Vector2(0,-2)
+			new Vector2(0,1),
+			new Vector2(-1,2),
+			new Vector2(0,2)
 		};
 	}
 }
@@ -138,9 +138,9 @@ public class Tetromino_L : Tetromino
 		type = Tetromino.Types.L;
 		blocks = new Vector2[] {
 			new Vector2(0,0),
-			new Vector2(0,-1),
-			new Vector2(0,-2),
-			new Vector2(1,-2)
+			new Vector2(0,1),
+			new Vector2(0,2),
+			new Vector2(1,2)
 		};
 	}
 }
