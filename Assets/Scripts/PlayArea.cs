@@ -34,7 +34,7 @@ public class PlayArea : MonoBehaviour
 	protected int convertXYToGridIndex(int x, int y)
 	{
 		Assert.IsTrue (x >= 0 && x < BlocksPerRow);
-		Assert.IsTrue (y >= 0 && x < NumberOfRows);
+		Assert.IsTrue (y >= 0 && y < NumberOfRows);
 		return (y * BlocksPerRow) + x;
 	}
 	
