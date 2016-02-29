@@ -51,6 +51,11 @@ public class PlayArea : MonoBehaviour
 		grid [convertXYToGridIndex (x, y)] = spriteIndex;
 		isDirty = true;
 	}
+	public void SetBlockType(Vector2 v, int spriteIndex)
+	{
+		SetBlockType (Mathf.FloorToInt (v.x), Mathf.FloorToInt (v.y), spriteIndex);
+	}
+	
 
 
 	void Update()
