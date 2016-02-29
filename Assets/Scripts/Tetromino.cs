@@ -78,8 +78,8 @@ public class Tetromino_I : Tetromino
 		spriteType = 1;
 		type = Tetromino.Types.I;
 		blocks = new Vector2[] {
-			new Vector2(0,0),
 			new Vector2(0,1),
+			new Vector2(0,0),
 			new Vector2(0,2),
 			new Vector2(0,3)
 		};
@@ -108,8 +108,8 @@ public class Tetromino_Z : Tetromino
 		spriteType = 5;
 		type = Tetromino.Types.Z;
 		blocks = new Vector2[] {
-			new Vector2(-1,0),
 			new Vector2(0,0),
+			new Vector2(-1,0),
 			new Vector2(0,1),
 			new Vector2(1,1)
 		};
@@ -123,10 +123,10 @@ public class Tetromino_J : Tetromino
 		spriteType = 3;
 		type = Tetromino.Types.J;
 		blocks = new Vector2[] {
-			new Vector2(0,0),
 			new Vector2(0,1),
-			new Vector2(-1,2),
-			new Vector2(0,2)
+			new Vector2(0,0),
+			new Vector2(0,2),
+			new Vector2(-1,2)
 		};
 	}
 }
@@ -138,8 +138,8 @@ public class Tetromino_L : Tetromino
 		spriteType = 4;
 		type = Tetromino.Types.L;
 		blocks = new Vector2[] {
-			new Vector2(0,0),
 			new Vector2(0,1),
+			new Vector2(0,0),
 			new Vector2(0,2),
 			new Vector2(1,2)
 		};
