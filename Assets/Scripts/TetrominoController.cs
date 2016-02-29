@@ -234,14 +234,103 @@ public class TetrominoController : MonoBehaviour
 
 	}
 
-	
-	protected void RotateRight()
+
+	protected bool canRotateLeft()
 	{
+		Vector2 test;
+		
+		for (int n = 0; n < tetromino.blocks.Length; n++) {
+
+			test = Quaternion.AngleAxis (90, Vector3.forward) * (tetromino.blocks [n] - tetromino.blocks [0]);
+			test.x = Mathf.RoundToInt (test.x) + tetromino.blocks [0].x;
+			test.y = Mathf.RoundToInt (test.y) + tetromino.blocks [0].y;
+
+
+			if (test.x < 0) {
+				return false;
+			}
+			if (test.x > PlayArea.BlocksPerRow - 1) {
+				return false;
+			}
+
+			if (test.y < 0) {
+				return false;
+			}
+			if (test.y > PlayArea.NumberOfRows - 1) {
+				return false;
+			}
+
+			if (playArea.GetBlockType (Mathf.FloorToInt (test.x), Mathf.FloorToInt (test.y)) != 0) {
+				return false;
+			}
+			
+		}
+
+		return true;
 	}
-
-
 	protected void RotateLeft()
 	{
+		RemoveFromArea ();
+
+		if (canRotateLeft ()) {
+			for (int n = 1; n < tetromino.blocks.Length; n++) {
+				tetromino.blocks [n] = Quaternion.AngleAxis (90, Vector3.forward) * (tetromino.blocks [n] - tetromino.blocks [0]);
+				tetromino.blocks [n].x = Mathf.RoundToInt (tetromino.blocks[n].x) + tetromino.blocks [0].x;
+				tetromino.blocks [n].y = Mathf.RoundToInt (tetromino.blocks[n].y) + tetromino.blocks [0].y;
+			}
+		}
+
+		Redraw ();
+	}
+
+	protected bool canRotateRight()
+	{
+		Vector2 test;
+
+		for (int n = 0; n < tetromino.blocks.Length; n++) {
+
+			test = Quaternion.AngleAxis (-90, Vector3.forward) * (tetromino.blocks [n] - tetromino.blocks [0]);
+			test.x = Mathf.RoundToInt (test.x) + tetromino.blocks [0].x;
+			test.y = Mathf.RoundToInt (test.y) + tetromino.blocks [0].y;
+
+
+			// TODO: Refactor these IFs into isBlockValid() and use it in all the can() functions in here
+
+			if (test.x < 0) {
+				return false;
+			}
+			if (test.x > PlayArea.BlocksPerRow - 1) {
+				return false;
+			}
+
+			if (test.y < 0) {
+				return false;
+			}
+			if (test.y > PlayArea.NumberOfRows - 1) {
+				return false;
+			}
+
+			if (playArea.GetBlockType (Mathf.FloorToInt (test.x), Mathf.FloorToInt (test.y)) != 0) {
+				return false;
+			}
+
+		}
+
+		return true;
+	}
+	protected void RotateRight()
+	{
+		RemoveFromArea ();
+
+		if (canRotateRight ()) {
+			for (int n = 1; n < tetromino.blocks.Length; n++) {
+				tetromino.blocks [n] = Quaternion.AngleAxis (-90, Vector3.forward) * (tetromino.blocks [n] - tetromino.blocks [0]);
+				tetromino.blocks [n].x = Mathf.RoundToInt (tetromino.blocks[n].x) + tetromino.blocks [0].x;
+				tetromino.blocks [n].y = Mathf.RoundToInt (tetromino.blocks[n].y) + tetromino.blocks [0].y;
+			}
+		}
+
+		Redraw ();
 	}
 
 
