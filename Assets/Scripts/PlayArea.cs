@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Events;
 using UnityEngine.Assertions;
-using UnityEngine.UI;
 
 public class PlayArea : MonoBehaviour
 {
