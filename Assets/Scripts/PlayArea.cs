@@ -44,6 +44,10 @@ public class PlayArea : MonoBehaviour
 		Assert.IsNotNull (grid);
 		return grid [convertXYToGridIndex (x, y)];
 	}
+	public int GetBlockType(Vector2 v)
+	{
+		return GetBlockType (Mathf.FloorToInt (v.x), Mathf.FloorToInt (v.y));
+	}
 
 
 	public void SetBlockType(int x, int y, int spriteIndex)
