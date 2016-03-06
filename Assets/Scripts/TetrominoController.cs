@@ -70,6 +70,8 @@ public class TetrominoController : MonoBehaviour
 
 			// TODO: Play block stop sound
 
+			playArea.ClearFullLines ();
+
 			// TODO: if (Options.tetriFast == false)
 			yield return new WaitForSeconds (1f);
 		}

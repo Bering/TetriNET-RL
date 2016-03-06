@@ -57,7 +57,6 @@ public class PlayArea : MonoBehaviour
 	{
 		SetBlockType (Mathf.FloorToInt (v.x), Mathf.FloorToInt (v.y), spriteIndex);
 	}
-	
 
 
 	void Update()
@@ -66,6 +65,51 @@ public class PlayArea : MonoBehaviour
 			GridChangedEvent.Invoke ();
 			isDirty = false;
 		}
+	}
+
+
+	public int ClearFullLines()
+	{
+		int linesCleared = 0;
+
+		for (int y = 0; y < NumberOfRows; y++) {
+			if (isLineFull (y)) {
+				ClearLine (y);
+				linesCleared++;
+				y--; // redo this line, now that it contains the stuff that was above
+			}
+		}
+
+		return linesCleared;
+	}
+
+
+	protected bool isLineFull(int y)
+	{
+		for (int x = 0; x < BlocksPerRow; x++) {
+			if (GetBlockType (x,y) == 0) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+
+	protected void ClearLine(int clearY)
+	{
+		int x, y;
+
+		for (y = clearY; y < NumberOfRows-1; y++) {
+			for (x = 0; x < BlocksPerRow; x++) {
+				SetBlockType (x, y, GetBlockType (x, y + 1));
+			}
+		}
+		
+		for (x = 0; x < BlocksPerRow; x++) {
+			SetBlockType (x, y, 0);
+		}
+		
 	}
 
 }
