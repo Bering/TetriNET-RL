@@ -38,6 +38,9 @@ public class Tetromino
 		for (int i = 0; i < blocks.Length; i++) {
 			blocks[i] = spawnPoint - blocks[i];
 
+			if (playArea.GetBlockType (blocks[i]) != 0) {
+				hasLanded = true;
+			}
 			playArea.SetBlockType (Mathf.FloorToInt(blocks[i].x), Mathf.FloorToInt(blocks[i].y), spriteType);
 		}
 	}
@@ -207,6 +210,7 @@ public class Tetromino
 
 		Redraw ();
 	}
+
 
 	public bool canRotateRight()
 	{

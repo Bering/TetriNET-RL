@@ -14,13 +14,16 @@ public class TetrominoController : MonoBehaviour
 	protected Tetromino tetromino = null;
 	protected PlayArea playArea;
 	protected bool dropping = false;
-	protected bool looping = false;
 
 
 	Tetromino SpawnNewTetromino()
 	{
 		Tetromino t = Tetromino.CreateRandomTetromino();
 		t.Spawn (playArea);
+		if (t.hasLanded) {
+			return null;
+		}
+
 		dropping = false;
 		lastInputTime = 0;
 
@@ -42,16 +45,22 @@ public class TetrominoController : MonoBehaviour
 
 	protected IEnumerator Loop()
 	{
-		looping = true;
+		bool lost = false;
+
 		Debug.Log ("Loop started");
 
 		// TODO: Play start sound
-		// TODO: Start soundtrack
+		// TODO: Start music
 
 		yield return new WaitForSeconds (1f);
 
-		while (looping) {
+		while (true) {
 			tetromino = SpawnNewTetromino ();
+
+			if (tetromino == null) {
+				lost = true;
+				break;
+			}
 
 			while (!tetromino.hasLanded) {
 				yield return new WaitForSeconds (1f);
@@ -63,6 +72,17 @@ public class TetrominoController : MonoBehaviour
 
 			// TODO: if (Options.tetriFast == false)
 			yield return new WaitForSeconds (1f);
+		}
+
+		// TODO: Stop music
+
+		if (lost) {
+			// TODO: Play the "You Lost" sound/song
+			Debug.Log ("You lost!");
+		}
+		else {
+			// TODO: Play the "You Win!" sound/song
+			Debug.Log ("You win!");
 		}
 	}
 
