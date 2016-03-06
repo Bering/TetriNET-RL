@@ -107,7 +107,7 @@ public class PlayArea : MonoBehaviour
 		}
 		
 		for (x = 0; x < BlocksPerRow; x++) {
-			SetBlockType (x, y, 0);
+			SetBlockType (x, NumberOfRows-1, 0);
 		}
 		
 	}
