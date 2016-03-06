@@ -3,7 +3,7 @@ Yet another clone of TetriNET, the 1997 Tetris game by St0rmCat, written in Unit
 ![Screenshot](Screenshots/latest.gif)
 
 ## Status
-Alpha. Not playable yet. Ugly main menu. Working on Solo mode. Solo backend mostly done. Tetrominoes spawn, you can move and rotate them. Once they stick you get another one.
+Alpha. Core Tetris is playable in a test scene but that's it. Ugly main menu. Work In Progress.
 
 ## Planned Features
 * Cross-platform (Android. WebGL, Linux, Mac, Windows, maybe more)
@@ -12,13 +12,11 @@ Alpha. Not playable yet. Ugly main menu. Working on Solo mode. Solo backend most
 
 ## TODO
 * Start with SOLO mode
-  - Refactor the TetrominoController test spaghetti into code
   - Sounds
-  - Detect completed lines
-  - Remove completed lines
-  - Move down everything above a completed line
   - Lines counter
   - Levels counter
+  - The higher the level, the faster the blocks drop
+  - Start Solo mode via menu
   - Add Rewired, tweak PC controls
   - Figure out and tweak Android controls
 * HOST menu (show your public IP, HOST button)
@@ -34,7 +32,7 @@ Alpha. Not playable yet. Ugly main menu. Working on Solo mode. Solo backend most
   - Special blocks effects
 * Figure out a clever way to invite friends (SMS? Email? Twitter? Unity Matchmaking? Photon Library?)
 * Options menu (TetriFast, TetriNET2 blocks, Mixers volumes, whatever else?)
-* voice chat?
+
 
 ## FAQ
 
