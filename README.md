@@ -12,11 +12,10 @@ Alpha. Core Tetris is playable in a test scene but that's it. Ugly main menu. Wo
 
 ## TODO
 * Start with SOLO mode
-  - Sounds
   - Lines counter
   - Levels counter
   - The higher the level, the faster the blocks drop
-  - Start Solo mode via menu
+  - Sounds
   - Add Rewired, tweak PC controls
   - Figure out and tweak Android controls
 * HOST menu (show your public IP, HOST button)
