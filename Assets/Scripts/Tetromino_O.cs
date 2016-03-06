@@ -13,4 +13,15 @@ public class Tetromino_O : Tetromino
 			new Vector2(1,1)
 		};
 	}
+
+
+	public override void RotateLeft()
+	{
+	}
+
+
+	public override void RotateRight()
+	{
+	}
+
 }

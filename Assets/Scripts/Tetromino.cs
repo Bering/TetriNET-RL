@@ -196,7 +196,7 @@ public class Tetromino
 
 		return true;
 	}
-	public void RotateLeft()
+	public virtual void RotateLeft()
 	{
 		RemoveFromArea ();
 
@@ -246,7 +246,7 @@ public class Tetromino
 
 		return true;
 	}
-	public void RotateRight()
+	public virtual void RotateRight()
 	{
 		RemoveFromArea ();
 
