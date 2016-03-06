@@ -65,8 +65,8 @@ public class Tetromino
 		int x, y;
 
 		for (int n = 0; n < blocks.Length; n++) {
-			x = Mathf.RoundToInt (blocks [n].x);
-			y = Mathf.RoundToInt (blocks [n].y);
+			x = Mathf.FloorToInt (blocks [n].x);
+			y = Mathf.FloorToInt (blocks [n].y);
 
 			if (x == 0) {
 				return false;
@@ -98,8 +98,8 @@ public class Tetromino
 		int x, y;
 
 		for (int n = 0; n < blocks.Length; n++) {
-			x = Mathf.RoundToInt (blocks [n].x);
-			y = Mathf.RoundToInt (blocks [n].y);
+			x = Mathf.FloorToInt (blocks [n].x);
+			y = Mathf.FloorToInt (blocks [n].y);
 
 			if (x == PlayArea.BlocksPerRow-1) {
 				return false;
@@ -131,8 +131,8 @@ public class Tetromino
 		int x, y;
 
 		for (int n = 0; n < blocks.Length; n++) {
-			x = Mathf.RoundToInt (blocks [n].x);
-			y = Mathf.RoundToInt (blocks [n].y);
+			x = Mathf.FloorToInt (blocks [n].x);
+			y = Mathf.FloorToInt (blocks [n].y);
 
 			if (y == 0) {
 				return false;
