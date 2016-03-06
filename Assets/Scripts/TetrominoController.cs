@@ -5,11 +5,8 @@ using System.Collections;
 public class TetrominoController : MonoBehaviour
 {
 
-	[SerializeField]
-	protected float inputCooldown = 0.1f;
-	[SerializeField]
+	public float inputCooldown = 0.1f;
 	protected float lastInputTime = 0;
-
 
 	protected Tetromino tetromino = null;
 	protected PlayArea playArea;
