@@ -69,5 +69,12 @@ public class PlayAreaView : MonoBehaviour
 	}
 
 
+	public void OnFullLineFound(int y)
+	{
+		// TODO: Call SpriteBlaster on each blocks
+		playArea.ClearLine (y);
+	}
+
+
 }
 

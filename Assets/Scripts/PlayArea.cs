@@ -12,6 +12,8 @@ public class PlayArea : MonoBehaviour
 	public const int spawnX = 5;
 
 	public UnityEvent GridChangedEvent;
+	[System.Serializable] public class FullLineFoundEventClass :  UnityEvent<int> {}
+	public FullLineFoundEventClass FullLineFoundEvent;
 
 	protected int[] grid;
 	protected bool isDirty;
@@ -68,23 +70,17 @@ public class PlayArea : MonoBehaviour
 	}
 
 
-	public int ClearFullLines()
+	public void FindFullLines()
 	{
-		int linesCleared = 0;
-
 		for (int y = 0; y < NumberOfRows; y++) {
 			if (isLineFull (y)) {
-				ClearLine (y);
-				linesCleared++;
-				y--; // redo this line, now that it contains the stuff that was above
+				FullLineFoundEvent.Invoke (y);
 			}
 		}
-
-		return linesCleared;
 	}
 
 
-	protected bool isLineFull(int y)
+	public bool isLineFull(int y)
 	{
 		for (int x = 0; x < BlocksPerRow; x++) {
 			if (GetBlockType (x,y) == 0) {
@@ -96,7 +92,7 @@ public class PlayArea : MonoBehaviour
 	}
 
 
-	protected void ClearLine(int clearY)
+	public void ClearLine(int clearY)
 	{
 		int x, y;
 
