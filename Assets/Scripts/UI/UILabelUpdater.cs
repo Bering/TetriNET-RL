@@ -13,33 +13,33 @@ public class UILabelUpdater : MonoBehaviour {
 	}
 
 
-	public void UpdateLabelInt(int newValue)
+	public void UpdateLabel(int newValue)
 	{
 		label.text = newValue.ToString();
 	}
 
-	public void UpdateLabelFloat(float newValue)
+	public void UpdateLabel(float newValue)
 	{
 		label.text = newValue.ToString();
 	}
 
-	public void UpdateLabelString(string newValue)
+	public void UpdateLabel(string newValue)
 	{
 		label.text = newValue;
 	}
 
 
-	public void AppendInt(int valueToAdd)
+	public void AppendToLabel(int valueToAdd)
 	{
 		label.text += valueToAdd.ToString();
 	}
 
-	public void AppendFloat(float valueToAdd)
+	public void AppendToLabel(float valueToAdd)
 	{
 		label.text += valueToAdd.ToString();
 	}
 
-	public void AppendString(string valueToAdd)
+	public void AppendToLabel(string valueToAdd)
 	{
 		label.text += valueToAdd;
 	}
