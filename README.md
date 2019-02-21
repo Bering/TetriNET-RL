@@ -3,7 +3,9 @@ Yet another clone of TetriNET, the 1997 Tetris game by St0rmCat, written in Unit
 ![Screenshot](Screenshots/latest.gif)
 
 ## Status
-Alpha. Core Tetris is playable in a test scene but that's it. Ugly main menu. Work In Progress.
+Alpha. Core Tetris is playable in a test scene but that's it. Ugly main menu.
+
+Abandoned. Play in your browser at http://blockbattle.net/ instead.
 
 ## Planned Features
 * Cross-platform (Android. WebGL, Linux, Mac, Windows, maybe more)
